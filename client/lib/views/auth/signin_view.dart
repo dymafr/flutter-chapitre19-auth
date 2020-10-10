@@ -31,7 +31,7 @@ class _SigninViewState extends State<SigninView> {
       form.save();
       final response = await Provider.of<AuthProvider>(context, listen: false)
           .signin(signinForm);
-      if (response['error'] == null) {
+      if (response is User) {
         Provider.of<UserProvider>(context, listen: false).updateUser(response);
         Navigator.pushNamed(context, ProfileView.routeName);
       } else {

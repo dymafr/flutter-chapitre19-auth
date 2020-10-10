@@ -11,7 +11,7 @@ class UserProvider with ChangeNotifier {
 
   update(AuthProvider newAuthProvider) {
     authProvider = newAuthProvider;
-    if (user == null) {
+    if (user == null && authProvider.isLoggedin) {
       fetchCurrentUser();
     }
   }
