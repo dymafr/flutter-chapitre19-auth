@@ -5,12 +5,12 @@ class NotFoundView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text(
-        'Not found !',
-        style: TextStyle(
-          fontSize: 35,
-          fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: const Text(
+          'Not found !',
+          style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
         ),
       ),
     );

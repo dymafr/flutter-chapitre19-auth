@@ -1,9 +1,10 @@
-import '../providers/auth_provider.dart';
-import 'home_view.dart';
-import 'profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/auth_provider.dart';
+import 'home_view.dart';
+import 'profile_view.dart';
 
 class SplashView extends StatelessWidget {
   static const String routeName = '/';
@@ -12,12 +13,12 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool? isLogggedin = Provider.of<AuthProvider>(context).isLoggedin;
-    if (isLogggedin != null) {
+    final bool? isLoggedin = Provider.of<AuthProvider>(context).isLoggedin;
+    if (isLoggedin != null) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (isLogggedin == false) {
+        if (isLoggedin == false) {
           Navigator.pushReplacementNamed(context, HomeView.routeName);
-        } else if (isLogggedin == true) {
+        } else if (isLoggedin == true) {
           Navigator.pushReplacementNamed(context, ProfileView.routeName);
         }
       });

@@ -12,9 +12,9 @@ router.post('/', async (req, res, next) => {
       res.status(400).json({ error: 'missing credentials' });
     } else {
       const user = await User.findOne({ email: body.email }, '-__v', {}).exec();
-      const match = await bcrypt.compare(body.password, user.password);
+      const match = user && (await bcrypt.compare(body.password, user.password));
       if (!match) {
-        res.status(400).json({ error: 'wrong password' });
+        res.status(400).json({ error: 'wrong credentials' });
       } else {
         const token = jsonwebtoken.sign(
           {
@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
           res.status(400).json({ error: 'something went wrong' });
         } else {
           res.status(200).json({
-            user,
+            user: { _id: user._id, username: user.username, email: user.email },
             token,
           });
         }

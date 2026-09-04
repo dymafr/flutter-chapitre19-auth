@@ -1,9 +1,9 @@
-import 'package:client/models/user_model.dart';
-import 'package:client/providers/auth_provider.dart';
-import 'package:client/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/user_model.dart';
+import '../providers/auth_provider.dart';
+import '../providers/user_provider.dart';
 import 'home_view.dart';
 
 class ProfileView extends StatelessWidget {
@@ -24,15 +24,13 @@ class ProfileView extends StatelessWidget {
               tileColor: Theme.of(context).primaryColor,
               title: const Text(
                 'Déconnexion',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                style: TextStyle(color: Colors.white),
               ),
               onTap: () {
                 Provider.of<AuthProvider>(context, listen: false).signout();
                 Navigator.pushNamed(context, HomeView.routeName);
               },
-            )
+            ),
           ],
         ),
       ),

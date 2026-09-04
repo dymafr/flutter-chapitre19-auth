@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'providers/user_provider.dart';
 import 'providers/auth_provider.dart';
+import 'providers/user_provider.dart';
 import 'views/auth/signin_view.dart';
 import 'views/auth/signup_view.dart';
 import 'views/home_view.dart';
-import 'views/splash_view.dart';
-import 'views/profile_view.dart';
 import 'views/not_found_view.dart';
+import 'views/profile_view.dart';
+import 'views/splash_view.dart';
 
 void main() {
   runApp(const MyAuth());
@@ -23,7 +23,6 @@ class MyAuth extends StatefulWidget {
 
 class _MyAuthState extends State<MyAuth> {
   final AuthProvider authProvider = AuthProvider();
-  final UserProvider userProvider = UserProvider();
 
   @override
   void initState() {
@@ -37,13 +36,16 @@ class _MyAuthState extends State<MyAuth> {
       providers: [
         ChangeNotifierProvider.value(value: authProvider),
         ChangeNotifierProxyProvider<AuthProvider, UserProvider>(
-            create: (_) => UserProvider(),
-            update: (_, authProvider, oldUserProvider) =>
-                oldUserProvider!..update(authProvider)),
+          create: (_) => UserProvider(),
+          update: (_, authProvider, oldUserProvider) =>
+              oldUserProvider!..update(authProvider),
+        ),
       ],
       child: MaterialApp(
         title: 'my auth',
-        theme: ThemeData(primarySwatch: Colors.deepPurple),
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
         home: const SplashView(),
         onGenerateRoute: (settings) {
           if (settings.name == HomeView.routeName) {

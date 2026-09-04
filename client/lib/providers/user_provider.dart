@@ -1,18 +1,20 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/widgets.dart';
-import './auth_provider.dart';
+import 'package:http/http.dart' as http;
+
 import '../models/user_model.dart';
+import 'auth_provider.dart';
 
 class UserProvider extends ChangeNotifier {
-  // final String host = 'http://10.0.2.2';
-  final String host = 'http://localhost';
+  // Changer à localhost si Web
+  final String host = 'http://10.0.2.2';
   User? user;
   late AuthProvider authProvider;
 
-  update(AuthProvider newAuthProvider) {
+  void update(AuthProvider newAuthProvider) {
     authProvider = newAuthProvider;
-    if (user == null && authProvider.isLoggedin == true) {
+    if (user == null && (authProvider.isLoggedin ?? false)) {
       fetchCurrentUser();
     }
   }
@@ -24,11 +26,7 @@ class UserProvider extends ChangeNotifier {
         headers: {'authorization': 'Bearer ${authProvider.token}'},
       );
       if (response.statusCode == 200) {
-        updateUser(
-          User.fromJson(
-            json.decode(response.body),
-          ),
-        );
+        updateUser(User.fromJson(json.decode(response.body)));
       }
     } catch (e) {
       rethrow;

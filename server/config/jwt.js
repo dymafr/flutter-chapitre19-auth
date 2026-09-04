@@ -1,3 +1,3 @@
 module.exports = {
-  JWT_SECRET: '123 trois petits chats',
+  JWT_SECRET: process.env.JWT_SECRET,
 };

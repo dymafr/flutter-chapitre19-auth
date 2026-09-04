@@ -1,21 +1,22 @@
 import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../models/signup_form_model.dart';
+
 import '../models/signin_form_model.dart';
+import '../models/signup_form_model.dart';
 import '../models/user_model.dart';
 
 class AuthProvider extends ChangeNotifier {
   // Changer à localhost si Web
-  // final String host = 'http://10.0.2.2';
-  final String host = 'http://localhost';
+  final String host = 'http://10.0.2.2';
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   String? token;
-  bool? isLoading = false;
-  late bool? isLoggedin;
-  late Timer? timer;
+  bool isLoading = false;
+  bool? isLoggedin;
+  Timer? timer;
 
   Future<void> initAuth() async {
     try {
@@ -80,9 +81,7 @@ class AuthProvider extends ChangeNotifier {
       http.Response response = await http.post(
         Uri.parse('$host/api/auth'),
         headers: {'Content-type': 'application/json'},
-        body: json.encode(
-          signinForm.toJson(),
-        ),
+        body: json.encode(signinForm.toJson()),
       );
       final Map<String, dynamic> body = json.decode(response.body);
       if (response.statusCode == 200) {

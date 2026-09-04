@@ -1,8 +1,9 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../models/signup_form_model.dart';
-import './signin_view.dart';
 import '../../providers/auth_provider.dart';
+import 'signin_view.dart';
 
 class SignupView extends StatefulWidget {
   static const String routeName = '/signup';
@@ -27,8 +28,10 @@ class _SignupViewState extends State<SignupView> {
   Future<void> submitForm() async {
     if (form.validate()) {
       form.save();
-      final error = await Provider.of<AuthProvider>(context, listen: false)
-          .signup(signupForm);
+      final error = await Provider.of<AuthProvider>(
+        context,
+        listen: false,
+      ).signup(signupForm);
       if (error == null && mounted) {
         Navigator.pushNamed(context, SigninView.routeName);
       }
@@ -39,8 +42,12 @@ class _SignupViewState extends State<SignupView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding:
-            const EdgeInsets.only(top: 50, bottom: 20, left: 20, right: 20),
+        padding: const EdgeInsets.only(
+          top: 50,
+          bottom: 20,
+          left: 20,
+          right: 20,
+        ),
         color: Colors.black,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,9 +60,7 @@ class _SignupViewState extends State<SignupView> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
-            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
             Form(
               key: key,
               child: Column(
@@ -68,24 +73,18 @@ class _SignupViewState extends State<SignupView> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 3),
-                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                   TextFormField(
                     decoration: InputDecoration(
                       fillColor: Colors.grey.shade900,
                       filled: true,
                     ),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: const TextStyle(color: Colors.white),
                     onSaved: (newValue) {
                       signupForm.email = newValue!;
                     },
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   const Text(
                     'username',
                     style: TextStyle(
@@ -93,24 +92,18 @@ class _SignupViewState extends State<SignupView> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 3),
-                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                   TextFormField(
                     decoration: InputDecoration(
                       fillColor: Colors.grey.shade900,
                       filled: true,
                     ),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: const TextStyle(color: Colors.white),
                     onSaved: (newValue) {
                       signupForm.username = newValue!;
                     },
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   const Text(
                     'password',
                     style: TextStyle(
@@ -118,24 +111,18 @@ class _SignupViewState extends State<SignupView> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 3),
-                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
                   TextFormField(
                     decoration: InputDecoration(
                       fillColor: Colors.grey.shade900,
                       filled: true,
                     ),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: const TextStyle(color: Colors.white),
                     onSaved: (newValue) {
                       signupForm.password = newValue!;
                     },
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,

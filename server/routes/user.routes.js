@@ -17,8 +17,12 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.get('/current', extractUser, (req, res, next) => {
-  res.json(req.user);
+router.get('/current', extractUser, (req, res) => {
+  if (!req.user) {
+    res.status(401).json({ error: 'unauthorized' });
+  } else {
+    res.json(req.user);
+  }
 });
 
 module.exports = router;

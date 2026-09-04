@@ -5,7 +5,7 @@ class User {
   User({required this.email, required this.username, this.id});
 
   User.fromJson(Map<String, dynamic> json)
-      : id = json['_id'],
-        username = json['username'],
-        email = json['email'];
+    : id = json['_id'],
+      username = json['username'],
+      email = json['email'];
 }

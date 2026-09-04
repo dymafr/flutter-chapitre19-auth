@@ -28,9 +28,7 @@ class HomeView extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
-            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 15)),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.grey.shade900,
@@ -61,7 +59,7 @@ class HomeView extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
